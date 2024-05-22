@@ -7,8 +7,8 @@ model_json = json_file.read()
 json_file.close()
 model = model_from_json(model_json)
 
-model.load_weights("facialemotionmodel.h5")
-haar_file=cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
+model.load_weights("facialemotionmodel.h5") # type: ignore
+haar_file=cv2.data.haarcascades + 'haarcascade_frontalface_default.xml' # type: ignore
 face_cascade=cv2.CascadeClassifier(haar_file)
 
 def extract_features(image):
@@ -28,7 +28,7 @@ while True:
             cv2.rectangle(im,(p,q),(p+r,q+s),(255,0,0),2)
             image = cv2.resize(image,(48,48))
             img = extract_features(image)
-            pred = model.predict(img)
+            pred = model.predict(img) # type: ignore
             prediction_label = labels[pred.argmax()]
             # print("Predicted Output:", prediction_label)
             # cv2.putText(im,prediction_label)
